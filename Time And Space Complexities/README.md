@@ -1,12 +1,11 @@
-# Object-Oriented Programming (OOPS)
+# Time and Space Complexity
 
-This folder includes programs based on core OOP principles in Java.
+This folder includes examples explaining algorithm efficiency.
 
 Topics covered:
-- Classes and Objects
-- Encapsulation
-- Inheritance
-- Polymorphism
-- Abstraction
+- Big-O notation
+- Best, average, worst case analysis
+- Space complexity basics
+- Optimization comparison
 
-Essential for writing scalable and maintainable code.
+Helps evaluate performance of algorithms effectively.
