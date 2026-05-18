@@ -1,5 +1,7 @@
 package Arrays;
 
+import java.util.ArrayList;
+
 class ArrayADT{
     int[] arr;
     int size;
@@ -275,6 +277,18 @@ class ArrayADT{
         arr[j]=temp;
     }
 
+    void insertionSort(){
+        for(int i=1;i<size;i++){
+            int j =i-1;
+            int key = arr[i];
+            while(j>=0 && arr[j]>key){
+                arr[j+1]=arr[j];
+                j--;
+            }
+            arr[j+1] = key;
+        }
+    }
+
     void bubbleSort(){
         for(int i=0;i<size-1;i++){
             for(int j=0;j<size-i-1;j++){
@@ -298,6 +312,64 @@ class ArrayADT{
         }
     }
 
+    void mergeSort(){
+        divide(0,size-1);
+    }
+
+    void divide(int start, int end){
+        if(start>=end) return;
+        int mid = (start+end)/2;
+        divide(start,mid);
+        divide(mid+1,end);
+        mergeArr(start,mid,end);
+    }
+
+    void mergeArr(int start, int mid, int end){
+        ArrayList<Integer> ans = new ArrayList<>();
+        int i= start;
+        int j = mid+1;
+        while(i<=mid && j<=end){
+            if(arr[i]<arr[j]){
+                ans.add(arr[i]);
+                i++;
+            }else{
+                ans.add(arr[j]);
+                j++;
+            }
+        }
+        while(i<=mid){
+            ans.add(arr[i]);
+            i++;
+        }
+        while(j<=end){
+            ans.add(arr[j]);
+            j++;
+        }
+        for(int idx=0;idx<ans.size();idx++){
+            arr[idx+start] = ans.get(idx);
+        }
+    }
+
+    void quickSort(int start, int end){
+        if(start>=end) return;
+        int pivot=partition(start,end);
+        quickSort(start,pivot-1);
+        quickSort(pivot+1,end);
+    }
+
+    int partition(int start, int end){
+        int pivot = arr[end];
+        int i=start-1;
+        for(int j=start;j<end;j++){
+            if(arr[j]<pivot){
+                i++;
+                swap(i,j);
+            }
+        }
+        swap(i+1,end);
+        return i+1;
+    }
+
 }
 
 public class ArrayUser {
@@ -314,8 +386,11 @@ public class ArrayUser {
         arr1.add(2,80);
         arr1.add(3,32);
         arr1.add(4,62);
+        arr1.add(5,75);
 
-        arr1.SelectionSort();
+//        arr1.insertionSort();
+//        arr1.mergeSort();
+        arr1.quickSort(0,5);
         arr1.print();
 
 //        arr1.bubbleSort();
